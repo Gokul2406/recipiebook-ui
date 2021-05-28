@@ -1,17 +1,22 @@
-import { Heading, Flex, Input, FormLabel, Button, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  Flex,
+  Input,
+  FormLabel,
+  Button,
+  Text,
+} from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
-import Link from "next/link"
-import {useMutation} from "@apollo/client";
-import LOGIN_MUTATION from "../graphql/mutations";
+import Link from "next/link";
+import { useMutation } from "@apollo/client";
+import LOGIN_MUTATION from "../graphql/loginmut";
 
 const IndexPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-	const [login, {data}] = useMutation(LOGIN_MUTATION, {
-		variables: {username: username, password: password}
-	})
-	
+  const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
+    variables: { username: username, password: password },
+  });
 
   return (
     <Flex height="100vh">
@@ -46,12 +51,24 @@ const IndexPage: React.FC = () => {
           }
           placeholder="Password"
         />
-        <Button size="lg" onClick={() => {
-		login()
-		}} colorScheme="blue" color="black" mt={3}>
+        <Button
+          size="lg"
+          onClick={() => {
+            login();
+	    console.log(data)
+	    if (data?.login.errors === null) {
+		window.location.replace("http://localhost:3000/feed")
+		}
+          }}
+          colorScheme="blue"
+          color="black"
+          mt={3}
+        >
           Log In
         </Button>
-	<Text mt={3}>No Account Setup one <Link href="/register">here</Link> </Text>
+        <Text mt={3}>
+          No Account Setup one <Link href="/register">here</Link>{" "}
+        </Text>
       </Flex>
     </Flex>
   );
