@@ -8,15 +8,10 @@ import {
 } from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
 import Link from "next/link";
-import { useMutation } from "@apollo/client";
-import LOGIN_MUTATION from "../graphql/loginmut";
 
 const IndexPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
-    variables: { username: username, password: password },
-  });
 
   return (
     <Flex height="100vh">
@@ -53,13 +48,6 @@ const IndexPage: React.FC = () => {
         />
         <Button
           size="lg"
-          onClick={() => {
-            login();
-	    console.log(data)
-	    if (data?.login.errors === null) {
-		window.location.replace("http://localhost:3000/feed")
-		}
-          }}
           colorScheme="blue"
           color="black"
           mt={3}
