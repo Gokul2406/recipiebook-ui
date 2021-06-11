@@ -7,7 +7,12 @@ const registerHandler = async(username: string, password: string, email: string)
       password: password,
       email: email
     }
-  }).then(resp => console.log(resp.data))
+  }).then((resp: any) => {
+	  if (resp.data.success) {
+		window.location.replace("http://localhost:3000/feed")
+		localStorage.setItem("accessToken", resp.data.accessToken)
+	  }
+  })
   .catch(err => console.log(err))
 }
 

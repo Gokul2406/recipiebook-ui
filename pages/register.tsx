@@ -12,11 +12,11 @@ const Register: React.FC = () => {
 			<Heading width="50vw">Register</Heading>
 			<Flex background="gray.600" p={12} direction="column">
 			<FormLabel>Username</FormLabel>
-			<Input type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
+			<Input isRequired type="text" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
 			<FormLabel mt={3}>Email</FormLabel>
-			<Input type="email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-			<FormLabel mt={3}>Password</FormLabel>
-			<Input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+			<Input isRequired type="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
+			<FormLabel  mt={3}>Password</FormLabel>
+			<Input isRequired type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
 			<Button mt={3} colorScheme="teal" onClick={() => registerHandler(username, password, email)}>Register</Button>
 			</Flex>
 		</Flex>

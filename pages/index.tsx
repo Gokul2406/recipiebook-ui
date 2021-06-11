@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
 import Link from "next/link";
-
+import loginHandler from "./_api/login"
 const IndexPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -51,6 +51,7 @@ const IndexPage: React.FC = () => {
           colorScheme="blue"
           color="black"
           mt={3}
+	onClick={() => loginHandler(username, password)}
         >
           Log In
         </Button>
