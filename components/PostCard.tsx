@@ -14,8 +14,8 @@ const PostCard: React.FC<PCProps> = ({
   ingredients,
 }) => {
   return (
-    <Flex alignItems="center" width="100%" height="auto" justifyContent="center">
-      <Box p={5} width="25vw" height="auto" bg="blackAlpha.400">
+    <Flex p={12} alignItems="center" width="100%" height="auto" justifyContent="center">
+      <Box borderRadius="30px" p={5} width="25vw" height="auto" bg="blackAlpha.400">
         <Flex direction="row">
           <Avatar>{username[0]}</Avatar>
           <Text ml={3} fontWeight="extrabold" fontSize="25px">
