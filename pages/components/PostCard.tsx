@@ -9,7 +9,7 @@ interface PCProps {
 
 const PostCard: React.FC<PCProps> = ({ username, preparation, ingredients }) => {
     return (
-      <Box>
+      <Box width="25vw" height="10vw" background="white"> 
         <Text>{username}</Text>
       </Box>
     )
