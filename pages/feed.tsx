@@ -21,7 +21,9 @@ const Feed: React.FC = () => {
 
   return (
     <>
+      {loading && (
       <Flex alignItems="center" width="100vw" height="100vh" justifyContent="center">{loading && <CircularProgress color="secondary" />}</Flex>
+      )}
       {loading === false && (
         <PostCard username="Gokul" ingredients="Nah" preparation="duh" />
       )}

@@ -1,18 +1,34 @@
-import React from "react"
-import {Box, Text} from "@chakra-ui/react"
+import React from "react";
+import { Box, Text, Flex } from "@chakra-ui/react";
+import { Avatar } from "@material-ui/core";
 
 interface PCProps {
   username: string;
   preparation: string;
-  ingredients: string
+  ingredients: string;
 }
 
-const PostCard: React.FC<PCProps> = ({ username, preparation, ingredients }) => {
-    return (
-      <Box width="25vw" height="10vw" background="white"> 
-        <Text>{username}</Text>
+const PostCard: React.FC<PCProps> = ({
+  username,
+  preparation,
+  ingredients,
+}) => {
+  return (
+    <Flex alignItems="center" width="100%" height="auto" justifyContent="center">
+      <Box p={5} width="25vw" height="auto" bg="blackAlpha.400">
+        <Flex direction="row">
+          <Avatar>{username[0]}</Avatar>
+          <Text ml={3} fontWeight="extrabold" fontSize="25px">
+            {username}
+          </Text>
+        </Flex>
+	<Text mt={3} fontSize="2xl">Ingredients</Text>
+        <Text>{ingredients}</Text>
+	<Text mt={3} fontSize="2xl">Preparation</Text>
+        <Text>{preparation}</Text>
       </Box>
-    )
-}
+    </Flex>
+  );
+};
 
-export default PostCard
+export default PostCard;
