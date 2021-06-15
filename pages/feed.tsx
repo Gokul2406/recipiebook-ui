@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import getFeed from "./_api/feed";
 import PostCard from "../components/PostCard";
 import {
-  AppBar,
   CircularProgress,
-  Toolbar,
-  Typography,
-  IconButton,
 } from "@material-ui/core";
-import { Flex } from "@chakra-ui/react";
-import {MenuOutlined} from "@material-ui/icons"
+import { Flex, Link } from "@chakra-ui/react";
+import Navbar from "../components/Navbar"
 
 const Feed: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,18 +36,12 @@ const Feed: React.FC = () => {
       )}
       {loading === false && (
         <>
-          <AppBar color="secondary" position="fixed">
-            <Toolbar>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-              >
-                <MenuOutlined />
-              </IconButton>
-              <Typography variant="h5">RecipieBook</Typography>
-            </Toolbar>
-          </AppBar>
+          <Navbar />
+          <Flex width="100%" p={4} height="auto" alignItems="center" justifyContent="center">
+          <Flex borderRadius={30} backgroundColor="blackAlpha.500" p={5}>
+          <Link href="http://localhost:3000/createrecipie">Create Recipies</Link>
+          </Flex>
+          </Flex>
           <Flex mt={15}>
             <PostCard username="Gokul" ingredients="Nah" preparation="duh" />
           </Flex>

@@ -8,7 +8,8 @@ const loginHandler = async(username: string, password: string) => {
 		}
 	}).then((resp: any) => {
 		console.log(resp.data)
-		if(resp.data.loggedIn) {
+		if(resp.data.loggedIn === true) {
+			localStorage.setItem("accessToken", resp.data.refreshToken)
 			window.location.replace("http://localhost:3000/feed")
 		}
 	})
