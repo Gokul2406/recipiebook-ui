@@ -1,15 +1,18 @@
 import axios from "axios"
 
-const createRecipie = async(title: string, ingredients: string, createdBy: string, preparation: string) => {
-    await axios.post('http://localhost:4000/api/create', {
+const createRecipie = async(title: string, ingredients: string, preparation: string, token: string) => {
+    await axios.post('http://localhost:4000/api/recipie/create', {
         data: {
             title: title,
             ingredients: ingredients,
-            createdBy: createdBy,
-            preparation: preparation
+            preparation: preparation,
+            token: token
         }
     }).then((res: any) => {
         console.log(res)
+        if (res.data.status === "Success") {
+            window.location.replace("http://localhost:3000/feed")
+        }
     }).catch(err => {
         console.log(err)
     })

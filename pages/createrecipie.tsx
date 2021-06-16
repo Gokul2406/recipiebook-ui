@@ -1,37 +1,39 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button ,FormLabel, Input, Textarea, Flex, Heading } from "@chakra-ui/react";
 import { AiOutlinePlusCircle } from "react-icons/ai"
-//import createRecipie from "./_api/createRecipie"
+import createRecipie from "./_api/createRecipie"
 
-interface CRState {
-  username: string;
-  preparation: string;
-  ingredients: string;
-  title: string;
+
+const initialState = {
+  title: "",
+  ingredients: ""
 }
 
 
-export default class CreateRecipie extends React.Component<{}, CRState> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      username: "",
-      preparation: "",
-      ingredients: "",
-      title: ""
+const CreateRecipie: React.FC = () => {
+
+    const [state, setState] = useState(initialState)
+    const [preparation, setPreparation] = useState("")
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target
+      setState({
+        ...state,
+        [name]: value
+      })
     }
-  }
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({[e.target.name]: e.target.value})
-  }
+    const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setPreparation(e.target.value)
+    }
 
-  handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    this.setState({preparation: e.target.value})
-  }
+    const handleSubmit = () => {
+      const { title, ingredients } = state
+      const token = localStorage.getItem("accessToken")
+      createRecipie(title, ingredients, preparation, (token as string))
 
-  render() {
+    }
 
     return (
       <>
@@ -47,17 +49,18 @@ export default class CreateRecipie extends React.Component<{}, CRState> {
         >
           <Heading>Create Recipie</Heading>
           <FormLabel mt={3}>Name of Dish </FormLabel>
-          <Input name="title" onChange={this.handleChange} type="text" placeHolder="Name" mb={3}/>
+          <Input onChange={handleChange} name="title" type="text" placeholder="Name" mb={3}/>
           <FormLabel>
             Ingriedients(Add a 'comma' after every ingriedient)
           </FormLabel>
-          <Input onChange={this.handleChange} name="ingredients" type="text" placeHolder="Ingriedients" />
+          <Input onChange={handleChange} name="ingredients" type="text" placeholder="Ingriedients" />
           <FormLabel mt={3}>Preparation</FormLabel>
-        <Textarea name="preparation" onChange={() => this.handleTextAreaChange()} value={this.state.preparation} placeholder="Type your preparation here" />
-        <Button leftIcon={<AiOutlinePlusCircle  />} colorScheme="yellow" mt={6}>Create Recipie</Button>
+        <Textarea name="preparation" onChange={handleTextAreaChange} placeholder="Type your preparation here" />
+        <Button onClick={handleSubmit} leftIcon={<AiOutlinePlusCircle  />} colorScheme="yellow" mt={6}>Create Recipie</Button>
         </Flex>
         </Flex>
       </>
     );
   }
-}
+
+export default CreateRecipie
